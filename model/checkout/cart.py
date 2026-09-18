@@ -18,7 +18,7 @@ class LineItem:
         return self._product.price * self._quantity
 
     def __str__(self):
-        return f"{self._product.name} x {self._quantity} = R$ {self._product.final_price():.2f}"
+        return f"{self._product.name} x {self._quantity} = R$ {self.subtotal():.2f}"
 
     def __repr__(self):
         return f"LineItem(sku={self._product.sku!r}, qty={self._quantity})"
