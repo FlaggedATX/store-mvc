@@ -3,14 +3,14 @@ from .product_category import ProductType
 from .pricing import *
 
 # Objetos de Valor
-@dataclass()
+@dataclass() #STATUS: 0
 class SKU:
     code: str
     
     def __str__(self):
         return self.code
 
-@dataclass()
+@dataclass() #STATUS: 0
 class Price:
     amount: float
     
@@ -54,7 +54,7 @@ class Product:
 
     # Métodos
     def final_price(self) -> float:
-        return self._price.amount + self._policy.factor()
+        return self._price.amount * self._policy.factor()
 
     def __repr__(self):
         return (f"Product(sku={self._sku!r}, name={self._name!r}, "
