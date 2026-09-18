@@ -8,6 +8,9 @@ class OrderStatus(Enum):
     FULFILLED = 1
     
 class Order:
+
+#TODO: ORDER STATUS SHOULD BE INSIDE
+
     _TRANSITIONS = {
         OrderStatus.PENDING:   OrderStatus.PAID,
         OrderStatus.PAID:      OrderStatus.FULFILLED,
