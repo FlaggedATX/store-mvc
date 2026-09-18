@@ -15,7 +15,7 @@ class LineItem:
         return self._quantity
 
     def subtotal(self) -> float:
-        return self._product.price * self._quantity
+        return self._product.final_price() * self._quantity
 
     def __str__(self):
         return f"{self._product.name} x {self._quantity} = R$ {self.subtotal():.2f}"
