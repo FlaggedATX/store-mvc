@@ -34,20 +34,20 @@ class Cart:
     
     @property
     def items(self):
-        return list(self._items)
+        return self._items
 
     def add(self, product: Product, qty: int) -> None:
-        for item in self._items:
-            if item.product.sku == product.sku:
-                # TODO: o que fazer aqui?
-                # remover o item antigo e adicionar um novo com qty somada?
-                # ou modificar o item existente?
-                # lembre que LineItem e imutavel... ou deveria ser?
-                pass
         self._items.append(LineItem(product, qty))
 
     def remove(self, sku: str) -> None:
-        self._items = [i for i in self._items if str(i.product.sku) != sku]
+        i = ''
+        cont = 0
+        while i != sku:
+            i = self._items[cont].product.sku
+            if i == sku:
+                self._items.remove(i)
+            else:
+                cont += 1
 
     def total(self) -> float:
         return sum(i.subtotal() for i in self._items)
