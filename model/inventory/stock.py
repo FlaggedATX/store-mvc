@@ -15,12 +15,15 @@ class StockItem:
         return self._quantity
 
     def add(self, n: int) -> None:
-        self._quantity = n + 1
+        self._quantity = self._quantity + n
 
     def remove(self, n: int) -> None:
         if not self._quantity:
             raise ValueError(f"Insufficient stock for {self._product.sku}")
-        self._quantity = n - 1
+        if (self._quantity - n) < 0:
+            raise ValueError(f"Insufficient stock, negative value, for {self._product.sku}")
+        else:
+            self._quantity = self._quantity - n
 
     def low_stock(self) -> bool:
         return self._quantity < self._min_stock

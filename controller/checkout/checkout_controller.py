@@ -30,5 +30,5 @@ class CheckoutController:
         return None
 
     def advance(self) -> None:
-        # TODO: Vou pra casa agora
+        # TODO: Vou pra casa agora verdade
         pass

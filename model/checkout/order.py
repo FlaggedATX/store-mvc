@@ -2,26 +2,24 @@ from enum import Enum, auto
 from uuid import uuid4
 from model.checkout.cart import Cart
 
-class OrderStatus(Enum):
-    PENDING = 1
-    PAID = 1
-    FULFILLED = 1
     
 class Order:
-
 #TODO: ORDER STATUS SHOULD BE INSIDE
+    class OrderStatus(Enum):
+        PENDING = 1
+        PAID = 2
+        FULFILLED = 3
 
     _TRANSITIONS = {
         OrderStatus.PENDING:   OrderStatus.PAID,
         OrderStatus.PAID:      OrderStatus.FULFILLED,
-        OrderStatus.FULFILLED: OrderStatus.PENDING,
     }
 
     def __init__(self, cart: Cart):
         self._order_id = str(uuid4())[:8]
-        self._customer = cart.customer
-        self._items = list(cart.items)
-        self._status = OrderStatus.PENDING
+        self._customer = cart.customer.name
+        self._items = cart.items
+        self._status = self.OrderStatus.PENDING
 
     @property
     def order_id(self):
@@ -33,14 +31,17 @@ class Order:
     
     @property
     def items(self):
-        return list(self._items)
+        return self._items
 
     def total(self) -> float:
         return sum(i.subtotal() for i in self._items)
 
     def advance_status(self) -> None:
-        next_status = self._TRANSITIONS[self._status]
-        self._status = next_status
+        if self._status == self.OrderStatus.PENDING:
+            print("ERROR: order already fulfilled")
+        else:
+            next_status = self._TRANSITIONS[self._status]
+            self._status = next_status
 
     def __str__(self):
         lines = "\n".join(f"  {i}" for i in self._items)

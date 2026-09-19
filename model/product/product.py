@@ -3,14 +3,14 @@ from .product_category import ProductType
 from .pricing import *
 
 # Objetos de Valor
-@dataclass() #STATUS: 0
+@dataclass #STATUS: 0
 class SKU:
     code: str
     
     def __str__(self):
         return self.code
 
-@dataclass() #STATUS: 0
+@dataclass #STATUS: 0
 class Price:
     amount: float
     

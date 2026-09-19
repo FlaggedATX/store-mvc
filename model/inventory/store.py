@@ -11,7 +11,7 @@ class Shelf:
     
     @property
     def items(self):
-        return list(self._items)
+        return self._items
 
     def add_item(self, item: StockItem) -> None:
         self._items.append(item)
@@ -40,7 +40,7 @@ class Aisle:
     
     @property
     def shelves(self):
-        return list(self._shelves)
+        return self._shelves
 
     def add_shelf(self, shelf: Shelf) -> None:
         self._shelves.append(shelf)
